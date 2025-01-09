@@ -7,9 +7,7 @@ if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     exit();
 }
-
-include("config.php");
-include("header.php");
+require("header.php");
 
 $page = isset($_GET['page']) ? $_GET['page'] : 'home';
 

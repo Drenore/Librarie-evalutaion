@@ -7,7 +7,7 @@ if (session_status() == PHP_SESSION_NONE) {
 $host = 'localhost';
 $dbname = 'library';
 $username = 'root';
-$password = 'mysql';
+$password = '';
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
@@ -15,4 +15,10 @@ try {
 } catch (PDOException $e) {
     die("Erreur de connexion à la base de données : " . $e->getMessage());
 }
+
+function sendEmail($to, $subject, $message) {
+    $headers = "From: noreply@votredomaine.com\r\n";
+    mail($to, $subject, $message, $headers);
+}
+
 ?>

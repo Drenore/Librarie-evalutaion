@@ -17,65 +17,72 @@ $resultTotalUsers = $stmtTotalUsers->fetch(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Accueil</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
+
 <body>
-<header>
+    <header>
         <h1>Librairie XYZ</h1>
     </header>
 
-<div class="wrapper">
+    <div class="wrapper">
         <!-- Sidebar -->
-       <nav id="sidebar">
-    <ul>
-        <?php if (isset($_SESSION['user'])) : ?>
-            <li>Bonjour <?= $_SESSION['prenom']; ?></li>
-            <li><a href="books.php">Voir la liste des livres</a></li>
-            <li><a href="profile.php">Mon profil</a></li>
-            <li><a href="logout.php">Deconnexion</a></li>
-        <?php else : ?>
-            <li><a href="login.php">Connexion</a></li>
-            <li><a href="register.php">Inscription</a></li>
-        <?php endif; ?>
-    </ul>
-</nav>
-        
+        <nav id="sidebar">
+            <ul>
+                <?php if (isset($_SESSION['user'])) : ?>
+                    <li>Bonjour <?= $_SESSION['prenom']; ?></li>
+                    <li><a href="books.php">Voir la liste des livres</a></li>
+                    <li><a href="profile.php">Mon profil</a></li>
+                    <li><a href="loans.php">Mes emprunts</a></li>
+                    <?php if (isset($_SESSION['role']) && $_SESSION['role'] === "admin"): ?>
+                        <li> <a href="admin_loans.php">Liste des emprunts à valider</a></li>
+                    <?php endif; ?>
+                    <li><a href="logout.php">Deconnexion</a></li>
+                <?php else : ?>
+                    <li><a href="login.php">Connexion</a></li>
+                    <li><a href="register.php">Inscription</a></li>
+                <?php endif; ?>
+            </ul>
+        </nav>
+
 
         <!-- Page Content -->
         <div id="content">
             <div class="container">
-                
+
                 <!-- Votre contenu principal va ici -->
                 <div id="content">
-                <h1>Dashboard</h1>
-    <div class="container">
-        
-    <div class="statistic">
-        
-            <h3>Total des Livres</h3>
-            <p><?php echo $resultTotalBooks['total_books']; ?></p>
-        </div>
+                    <h1>Dashboard</h1>
+                    <div class="container">
+
+                        <div class="statistic">
+
+                            <h3>Total des Livres</h3>
+                            <p><?php echo $resultTotalBooks['total_books']; ?></p>
+                        </div>
 
 
-        <div class="statistic">
-            <h3>Utilisateurs Enregistrés</h3>
-            <p><?php echo $resultTotalUsers['total_users']; ?></p>
-        </div>
+                        <div class="statistic">
+                            <h3>Utilisateurs Enregistrés</h3>
+                            <p><?php echo $resultTotalUsers['total_users']; ?></p>
+                        </div>
 
-        <!-- ... Autres statistiques ... -->
-    </div>
-</div>
+                        <!-- ... Autres statistiques ... -->
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Footer -->
-    <footer>
-    <div class="container">
-        <p>&copy; <?= date("Y"); ?> Librairie XYZ</p>
-    </div>
-</footer>
+        <footer>
+            <div class="container">
+                <p>&copy; <?= date("Y"); ?> Librairie XYZ</p>
+            </div>
+        </footer>
 </body>
+
 </html>
