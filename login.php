@@ -9,7 +9,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Requête pour récupérer l'utilisateur par son email
     $query = "SELECT id, mot_de_passe, prenom, role FROM utilisateurs WHERE email = :email";
     $stmt = $pdo->prepare($query);
-    $stmt->execute(array(':email' => $email));
+    $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+    $stmt->execute();
     $user = $stmt->fetch();
 
     if ($user && password_verify($password, $user['mot_de_passe'])) {
