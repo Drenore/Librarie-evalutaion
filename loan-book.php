@@ -24,7 +24,6 @@ if (isset($_GET["userid"]) && isset($_GET["idbook"])) {
         $stmt->bindParam(':statut', $status, PDO::PARAM_STR);
 
         if ($stmt->execute()) {
-         
             $query = "UPDATE livres SET statut = 'emprunté' WHERE id = :id";
             $stmt = $pdo->prepare($query);
             $stmt->bindParam(':id', $id_book, PDO::PARAM_INT);

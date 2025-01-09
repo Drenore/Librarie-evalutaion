@@ -8,6 +8,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
+    $name = htmlspecialchars($_POST['name'], ENT_QUOTES, 'UTF-8');
+    $prenom = htmlspecialchars($_POST['prenom'], ENT_QUOTES, 'UTF-8');
+    $email = htmlspecialchars($_POST['email'], ENT_QUOTES, 'UTF-8');
+    $password = $_POST['password'];
+
     // Vérification de l'existence de l'email
     $query = "SELECT * FROM utilisateurs WHERE email = :email";
     $stmt = $pdo->prepare($query);
@@ -37,12 +42,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Inscription</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
+
 <body>
-<header>
+    <header>
         <h1>Inscription - Librairie XYZ</h1>
     </header>
     <form method="post" action="">
@@ -53,7 +60,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <button type="submit">S'inscrire</button>
     </form>
 
-    <?php if (isset($error)) { echo "<p>$error</p>"; } ?>
+    <?php if (isset($error)) {
+        echo "<p>$error</p>";
+    } ?>
     <p>Vous avez déjà un compte ? <a href="login.php">Connectez-vous ici</a>.</p>
 </body>
+
 </html>
